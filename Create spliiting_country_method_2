@@ -1,0 +1,13 @@
+                                              // splitting_country(Method-2) //
+
+                                   
+CREATE procedure country_proc
+(
+@Country varchar(100)
+)
+AS
+begin
+declare @sql nvarchar(max)
+set @sql=N'select * into '+' '+@Country+'_'+'DATA'+' '+'from detail_record where Country='+'''@Country'''
+EXEC (@sql)
+end
