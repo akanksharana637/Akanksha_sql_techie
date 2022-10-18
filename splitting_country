@@ -1,0 +1,22 @@
+create proc country_wise
+( 
+@country nvarchar(max) 
+)
+as
+begin
+declare @SQString nvarchar(max)
+SET @SQString = 'CREATE TABLE '+ ' '+ @country+'_'+'DATA'+
+ '([Customer Name] [varchar](255) NOT NULL,
+	[Customer ID] [varchar](18) NOT NULL,
+	[Customer Open Date] [date] NOT NULL,
+	[Last Consulted Date] [date] NULL,
+	[Vaccination Type] [char](5) NULL,
+	[Doctor Consulted] [char](255) NULL,
+	[State] [char](255) NULL,
+	'+@country+' char(5) null,
+	[Post Code] [int] NULL,
+	[Date of Birth] [date] NULL,
+	[Active Customer] [char](1) NULL )'
+EXEC (@SQString)
+end
+exec country_wise 'IND_DATA'
