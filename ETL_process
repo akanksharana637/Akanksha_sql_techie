@@ -1,0 +1,3 @@
+                                  ----(ETL prpcress to extract data from file )----------
+dataframe = pd.read_csv(r"C:\Users\ashut\OneDrive\Documents\python_incubyte\Sample_data.rpt",sep='|')
+df=pd.DataFrame(dataframe)
