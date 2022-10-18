@@ -1,0 +1,32 @@
+
+--1. #Customers who ordered: Number of customers who ordered in the month of July--
+select COUNT(*)cnt_user,DATENAME(MM,processing_at)month from assignment
+where DATENAME(MM,processing_at)='july'
+group by DATENAME(MM,processing_at)
+
+--2. #Acquired customers: Number of customers who ordered in July for the first time, i.e. they did not place an order before July---
+select COUNT(*) cnt_user,[user_id],datename(mm,processing_at)month from assignment
+where DATENAME(mm,processing_at)='july'
+group by [user_id],processing_at
+having COUNT(*)=1
+
+--3. #Resurrected customers: Number of customers who ordered in July, but did not place an order in June, but had placed orders before June
+select COUNT(*)cnt_user,[user_id],datename(mm,processing_at) from assignment
+where DATENAME(mm,processing_at)='july' or 
+DATENAME(mm,processing_at)!='june'or 
+DATENAME(mm,processing_at)<'june'
+group by [user_id],datename(mm,processing_at)
+order by cnt_user asc
+
+--4. #Churned customers: Number of customers who had ordered in June but did not order in July.
+select COUNT(*)cnt_user ,[USER_ID],datename(mm,processing_at)month from assignment
+where datepart(mm,processing_at)>=6
+and datepart(mm,processing_at)<7
+group by [USER_ID] ,datename(mm,processing_at)
+order by cnt_user asc
+
+--5. #First order date in July: List of customers with their first order date in July month (not lifetime first order), who has already ordered in June.
+select COUNT(*)cnt_user,order_id,DATENAME(mm,processing_at)month from assignment
+where DATENAME(MM,processing_at)='july' or DATENAME(MM,processing_at)='june'
+group by order_id,DATENAME(mm,processing_at)
+having COUNT(*)=1 
