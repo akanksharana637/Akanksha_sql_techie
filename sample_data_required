@@ -1,0 +1,7 @@
+                         -------------------Sample format of required data----------------
+                                              
+
+SELECT [Customer Name] Name,[Customer ID] Cust_I, Convert(varchar,[Customer Open Date],112)Open_Dt, Convert(varchar,[Last Consulted Date],112)Consul_Dt,
+[Vaccination Type] VAC_ID,[Doctor Consulted] DR_Name,[State]  State,[Country] County,
+replace(convert(varchar, [Date of Birth],103),'/','')DOB,[Active Customer] FLAG
+from detail_record;
